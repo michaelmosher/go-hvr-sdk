@@ -65,8 +65,8 @@ func (s service) UpdateLocation(l hvrhub.Location) error {
 	return err
 }
 
-func (s service) DeleteLocation(l hvrhub.Location) error {
-	deleteStmt := "DELETE from hvr_location WHERE loc_name = :loc_name"
-	_, err := s.db.NamedExec(deleteStmt, l)
+func (s service) DeleteLocation(locationName string) error {
+	deleteStmt := "DELETE from hvr_location WHERE loc_name = $1"
+	_, err := s.db.Exec(deleteStmt, locationName)
 	return err
 }

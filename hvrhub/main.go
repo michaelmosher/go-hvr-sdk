@@ -4,7 +4,7 @@ type client interface {
 	GetLocation(string) (Location, error)
 	NewLocation(Location) error
 	UpdateLocation(Location) error
-	DeleteLocation(Location) error
+	DeleteLocation(string) error
 }
 
 type Service struct {
@@ -23,6 +23,6 @@ func (s Service) UpdateLocation(l Location) error {
 	return s.Client.UpdateLocation(l)
 }
 
-func (s Service) DeleteLocation(l Location) error {
-	return s.Client.DeleteLocation(l)
+func (s Service) DeleteLocation(locationName string) error {
+	return s.Client.DeleteLocation(locationName)
 }

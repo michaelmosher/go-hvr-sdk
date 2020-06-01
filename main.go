@@ -20,9 +20,9 @@ func main() {
 
 	name := "hello"
 
-	// if err = hub.GetLocation(hvrhub.Location{Name: name}); err != nil {
-	// 	log.Fatal(err)
-	// }
+	if err = hub.DeleteLocation(name); err != nil {
+		log.Fatal(err)
+	}
 
 	location, err := hub.GetLocation(name)
 
