@@ -15,7 +15,7 @@ func New(connectionString string) (service, error) {
 	db, err := sqlx.Connect("postgres", connectionString)
 
 	if err != nil {
-		return service{}, fmt.Errorf("error connecting to postgresql database: %s", err)
+		return service{}, fmt.Errorf("error connecting to postgres database: %s", err)
 	}
 
 	return service{db: db}, nil

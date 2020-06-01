@@ -11,6 +11,9 @@ func (s service) GetLocation(locationName string) (hvrhub.Location, error) {
 	err := s.db.Get(&location, "SELECT * FROM hvr_location WHERE loc_name = $1", locationName)
 
 	if err != nil {
+		if err.Error() == "sql: no rows in result set" {
+			return location, fmt.Errorf("location not found")
+		}
 		return location, fmt.Errorf("error getting location %s: %s", locationName, err)
 	}
 

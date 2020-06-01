@@ -11,18 +11,18 @@ import (
 func main() {
 	connStr := "host=localhost user=michaelmosher dbname=hvrhub sslmode=disable"
 
-	hub_client, err := hvrhub_postgresql.New(connStr)
+	pgClient, err := hvrhub_postgresql.New(connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	hub := hvrhub.Service{Client: hub_client}
+	hub := hvrhub.Service{Client: pgClient}
 
 	name := "hello"
 
-	if err = hub.GetLocation(hvrhub.Location{Name: name}); err != nil {
-		log.Fatal(err)
-	}
+	// if err = hub.GetLocation(hvrhub.Location{Name: name}); err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	location, err := hub.GetLocation(name)
 
