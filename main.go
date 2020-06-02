@@ -20,9 +20,27 @@ func main() {
 
 	name := "hello"
 
-	if err = hub.DeleteLocation(name); err != nil {
+	if err := hub.NewChannel(hvrhub.Channel{"Test", "This is for testing"}); err != nil {
 		log.Fatal(err)
 	}
+
+	if err := hub.UpdateChannel(hvrhub.Channel{"Test", "Test some more"}); err != nil {
+		log.Fatal(err)
+	}
+
+	if chn, err := hub.GetChannel("Test"); err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Printf("Hey, look at my channel: %+v\n", chn)
+	}
+
+	if err := hub.DeleteChannel("Test"); err != nil {
+		log.Fatal(err)
+	}
+
+	// if err = hub.DeleteLocation(name); err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	location, err := hub.GetLocation(name)
 

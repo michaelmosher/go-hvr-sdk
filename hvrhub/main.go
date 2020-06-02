@@ -5,6 +5,11 @@ type client interface {
 	NewLocation(Location) error
 	UpdateLocation(Location) error
 	DeleteLocation(string) error
+
+	GetChannel(string) (Channel, error)
+	NewChannel(Channel) error
+	UpdateChannel(Channel) error
+	DeleteChannel(string) error
 }
 
 type Service struct {
@@ -25,4 +30,20 @@ func (s Service) UpdateLocation(l Location) error {
 
 func (s Service) DeleteLocation(locationName string) error {
 	return s.Client.DeleteLocation(locationName)
+}
+
+func (s Service) GetChannel(channelName string) (Channel, error) {
+	return s.Client.GetChannel(channelName)
+}
+
+func (s Service) NewChannel(c Channel) error {
+	return s.Client.NewChannel(c)
+}
+
+func (s Service) UpdateChannel(c Channel) error {
+	return s.Client.UpdateChannel(c)
+}
+
+func (s Service) DeleteChannel(channelName string) error {
+	return s.Client.DeleteChannel(channelName)
 }
