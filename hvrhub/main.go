@@ -15,6 +15,10 @@ type client interface {
 	NewLocationGroup(LocationGroup) error
 	UpdateLocationGroup(LocationGroup) error
 	DeleteLocationGroup(string, string) error
+
+	GetLocationGroupMember(string, string, string) (LocationGroupMember, error)
+	NewLocationGroupMember(LocationGroupMember) error
+	DeleteLocationGroupMember(string, string, string) error
 }
 
 type Service struct {
@@ -67,4 +71,16 @@ func (s Service) UpdateLocationGroup(g LocationGroup) error {
 
 func (s Service) DeleteLocationGroup(channelName, groupName string) error {
 	return s.Client.DeleteLocationGroup(channelName, groupName)
+}
+
+func (s Service) GetLocationGroupMember(channelName, groupName, locationName string) (LocationGroupMember, error) {
+	return s.Client.GetLocationGroupMember(channelName, groupName, locationName)
+}
+
+func (s Service) NewLocationGroupMember(gm LocationGroupMember) error {
+	return s.Client.NewLocationGroupMember(gm)
+}
+
+func (s Service) DeleteLocationGroupMember(channelName, groupName, locationName string) error {
+	return s.Client.DeleteLocationGroupMember(channelName, groupName, locationName)
 }
