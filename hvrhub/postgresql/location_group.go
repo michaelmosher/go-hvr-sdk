@@ -22,6 +22,17 @@ func (s service) GetLocationGroup(channelName, groupName string) (hvrhub.Locatio
 	return group, nil
 }
 
+func (s service) FindLocationGroups(channelName string) ([]hvrhub.LocationGroup, error) {
+	groups := []hvrhub.LocationGroup{}
+
+	selectStmt := `SELECT * from hvr_loc_group WHERE chn_name = $1`
+	if err := s.db.Select(&groups, selectStmt, channelName); err != nil {
+		return groups, fmt.Errorf("error finding location groups (%s): %s", channelName, err)
+	}
+
+	return groups, nil
+}
+
 func (s service) NewLocationGroup(g hvrhub.LocationGroup) error {
 	insertStmt := `INSERT INTO hvr_loc_group(
 		chn_name,

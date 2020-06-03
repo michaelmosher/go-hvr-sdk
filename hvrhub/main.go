@@ -12,11 +12,13 @@ type client interface {
 	DeleteChannel(string) error
 
 	GetLocationGroup(string, string) (LocationGroup, error)
+	FindLocationGroups(string) ([]LocationGroup, error)
 	NewLocationGroup(LocationGroup) error
 	UpdateLocationGroup(LocationGroup) error
 	DeleteLocationGroup(string, string) error
 
 	GetLocationGroupMember(string, string, string) (LocationGroupMember, error)
+	FindLocationGroupMembers(string, string) ([]LocationGroupMember, error)
 	NewLocationGroupMember(LocationGroupMember) error
 	DeleteLocationGroupMember(string, string, string) error
 }
@@ -61,6 +63,10 @@ func (s Service) GetLocationGroup(channelName, groupName string) (LocationGroup,
 	return s.Client.GetLocationGroup(channelName, groupName)
 }
 
+func (s Service) FindLocationGroups(channelName string) ([]LocationGroup, error) {
+	return s.Client.FindLocationGroups(channelName)
+}
+
 func (s Service) NewLocationGroup(g LocationGroup) error {
 	return s.Client.NewLocationGroup(g)
 }
@@ -75,6 +81,10 @@ func (s Service) DeleteLocationGroup(channelName, groupName string) error {
 
 func (s Service) GetLocationGroupMember(channelName, groupName, locationName string) (LocationGroupMember, error) {
 	return s.Client.GetLocationGroupMember(channelName, groupName, locationName)
+}
+
+func (s Service) FindLocationGroupMembers(channelName, groupName string) ([]LocationGroupMember, error) {
+	return s.Client.FindLocationGroupMembers(channelName, groupName)
 }
 
 func (s Service) NewLocationGroupMember(gm LocationGroupMember) error {
